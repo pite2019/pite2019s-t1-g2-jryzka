@@ -26,3 +26,57 @@
 #Delete these comments before commit!
 #Good luck.
     
+from __future__ import division
+import random as ran
+
+class Car:
+	def __init__(self, v_0, ang):
+		self.speed = v_0
+		self.angle = ang
+	def print_parameters(self):
+		print "Current angle is", self.angle
+		print "Current speed is", self.speed
+	def change_speed(self, dv):
+		self.speed = self.speed + dv
+	def change_angle(self, da):
+		if ran.random >= 0.5:
+			self.angle = self.angle + da
+		else:
+			self.angle = self.angle + da
+	def obstacle(self, time):
+		print "You will crash into obstacle in ", time, " seconds"
+	def set_new_param(self, new_speed, new_angle):
+		self.speed = new_speed
+		self.angle = new_angle
+
+
+start_velocity = float(raw_input("Type velocity: "))
+start_angle = float(raw_input("Type wheel angle: "))
+
+car = Car(start_velocity, start_angle)
+car.print_parameters()
+t = 10
+
+while 1:
+	while t>0:
+		car.obstacle(t)
+		car.change_speed(-2)
+		car.change_angle(5)
+		car.print_parameters()
+		t = t-1
+		if car.speed <0:
+			car.speed = 0
+			break
+	if car.speed <= 0:
+		print "You successfully stopped before crashing into obstacle"
+	else:
+		print "CRASH"
+
+	end = int(raw_input("Would you like to stop the program? (1 - yes), anything else - no : "))	
+	if end == 1:
+		break
+	else:
+		new_velocity = float(raw_input("Type new velocity: "))
+		new_ang = float(raw_input("Type new wheel angle: "))
+		car = Car(new_velocity,new_ang)
+	
